@@ -132,7 +132,7 @@ if (typeof _paq !== 'object') {
 if (typeof window.Piwik !== 'object') {
     window.Piwik = (function () {
         'use strict';
-		
+
 		/*将private.js、query.js、content-overlay.js、tracker.js移出，便于分析*/
 
         function TrackerProxy() {

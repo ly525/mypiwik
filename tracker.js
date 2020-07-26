@@ -1268,6 +1268,10 @@ function Tracker(trackerUrl, siteId) {
   }
 
   /**
+   *
+   * #!zh: function getRequest() {}: 专门用于搜集页面中的统计数据，
+   * 将它们拼接成指定链接的参数，而这条链接中的参数最终将会发送给服务器
+   *
    * Returns the URL to call piwik.php,
    * with the standard parameters (plugins, resolution, url, referrer, etc.).
    * Sends the pageview and browser settings with every request in case of race conditions.
@@ -1436,12 +1440,14 @@ function Tracker(trackerUrl, siteId) {
 	 * send_image 是否用图像请求方式传输数据
 	 * gt_ms 内容加载消耗的时间（响应结束时间减去请求开始时间）
 	 * pv_id 唯一性标识
+   *
+   * 浏览器能力检测：👇 detectBrowserFeatures()
 	 * 下面的字段都表示浏览器功能（navigator.mimeTypes、navigator.javaEnabled等）
 	 * pdf 是否支持pdf文件类型
 	 * qt 是否支持QuickTime Player播放器
 	 * realp 是否支持RealPlayer播放器
 	 * wma 是否支持MPlayer播放器
-	 * dir 
+	 * dir
 	 * fla 是否支持Adobe FlashPlayer
 	 * java 是否激活了Java
 	 * gears 是否安装了Google Gears
@@ -2812,6 +2818,7 @@ function Tracker(trackerUrl, siteId) {
   function detectBrowserFeatures() {
     var i,
       mimeType,
+      // pluginMap 保存了多个MIME类型，用来检测是否安装或启用了指定的插件或功能
       pluginMap = {
         // document types
         pdf: "application/pdf",
